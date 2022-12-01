@@ -107,9 +107,4 @@ OSCMessage.o: OSC/OSCMessage.cpp OSC/OSCMessage.h OSC/OSCData.h \
   OSC/OSCTiming.h OSC/SimpleWriter.h OSC/OSCMatch.h
 OSCTiming.o: OSC/OSCTiming.cpp OSC/OSCTiming.h
 SimpleWriter.o: OSC/SimpleWriter.cpp OSC/SimpleWriter.h
-SerialMCU.o: hardwares/SerialMCU.cpp hardwares/SerialMCU.h \
- hardwares/../OledScreen.h
-SDLUi.o: hardwares/SDLUi.cpp hardwares/SDLUi.h \
- hardwares/../OledScreen.h
-SDLI2cRotary.o: hardwares/SDLI2cRotary.cpp hardwares/SDLI2cRotary.h
-I2C_OLED_Pi.o: hardwares/I2cOledRotary.cpp hardwares/I2cOledRotary.h hardwares/../OledScreen.h
+
