@@ -14,18 +14,35 @@
 #include "Timer.h"
 #include "AppData.h"
 
-// include hardware interface
+// hardware interface controls
 // default to organelle original
 #ifdef CM3GPIO_HW
     #include "hw_interfaces/CM3GPIO.h"
-#endif
-
-#ifdef ORGANELLE_SDL_UI_HW
-    #include "hw_interfaces/SDLPi.h"
+    CM3GPIO controls;
 #endif
 
 #ifdef SERIAL_HW
     #include "hw_interfaces/SerialMCU.h"
+    SerialMCU controls;
+#endif
+
+// Use SDL for input/output, and if set, use i2c-rotary
+#ifdef ORGANELLE_SDL_UI_HW
+#ifdef ORGANELLE_I2C_ROTARY_HW
+    #include "hw_interfaces/I2C_Rotary_Pi.h"
+    SDLI2cRotary controls;
+#else
+    #include "hw_interfaces/SDLUi.h"
+    SDLUi controls;
+#endif
+#endif
+
+// Use i2c OLED for output, and if set, use i2c-rotary
+#ifdef ORGANELLE_I2C_OLED_HW
+#ifdef ORGANELLE_I2C_ROTARY_HW
+    #include "hw_interfaces/I2C_OLED_Pi.h"
+    I2cOledRotary controls;
+#endif
 #endif
 
 static const unsigned int MAX_KNOBS = 6;
@@ -47,20 +64,6 @@ int footswitchPos = 1; //normally closed
 
 // buffer for sending OSC messages 
 SimpleWriter oscBuf;
-
-// hardware interface controls
-// default to organelle original
-#ifdef CM3GPIO_HW
-    CM3GPIO controls;
-#endif
-
-#ifdef ORGANELLE_SDL_UI_HW
-    SDLPi controls;
-#endif
-
-#ifdef SERIAL_HW
-    SerialMCU controls;
-#endif
 
 /*
 sockets for communicating OSC with other programs we need 3:
@@ -266,7 +269,7 @@ int main(int argc, char* argv[]) {
 
                     || msgIn.dispatch("/wifiStatus", wifiStatus, 0)
 
-                    // support for puredata to send navigation messages
+                    // support for navigation OSC messages
                     || msgIn.dispatch("/nav/up", navUp, 0)
                     || msgIn.dispatch("/nav/down", navDown, 0)
                     || msgIn.dispatch("/nav/press", navPress, 0)

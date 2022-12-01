@@ -1,18 +1,17 @@
-#ifndef SDLEMU_H
-#define SDLEMU_H
+#ifndef HW_OLED_Pi_H
+#define HW_OLED_Pi_H
 
 
 #include <stdint.h> 
 #include "../OledScreen.h"
 #include "../OSC/OSCMessage.h"
 #include "../OSC/SimpleWriter.h"
-#include "../SLIPEncodedSerial.h"
 #include "../Serial.h"
 
-class SDLPi
+class I2cOledRotary
 {
     public:
-        SDLPi();
+        I2cOledRotary();
         void init();
         void poll();
         void pollKnobs();

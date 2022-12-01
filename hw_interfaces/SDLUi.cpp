@@ -1,14 +1,9 @@
-#include "SDLPi.h"
-#include <SDL2/SDL.h>
+#include "SDLUi.h"
 
-SDL_Renderer *renderer;
-SDL_Window *window;
-SDL_Joystick *joystick;
-
-SDLPi::SDLPi() {
+SDLUi::SDLUi() {
 }
 
-void SDLPi::init(){
+void SDLUi::init(){
     SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow("Organelle", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ORGANELLE_HW_WIDTH, ORGANELLE_HW_HEIGHT, SDL_WINDOW_RESIZABLE);
     renderer = SDL_CreateRenderer(window, -1, 0);
@@ -30,7 +25,7 @@ void SDLPi::init(){
     clearFlags();
 }
 
-void SDLPi::clearFlags() {
+void SDLUi::clearFlags() {
     encButFlag = 0;
     encTurnFlag = 0;
     knobFlag = 0;
@@ -40,7 +35,7 @@ void SDLPi::clearFlags() {
 
 // this polll uses keys for buttons and arrows for 2 menu knobs
 // eventually it will use stuff attached to GPIO
-void SDLPi::poll(){
+void SDLUi::poll(){
     SDL_Event e;
     while (SDL_PollEvent(&e)) {
         if (e.type == SDL_QUIT) {
@@ -85,10 +80,10 @@ void SDLPi::poll(){
     }
 }
 
-void SDLPi::pollKnobs(){
+void SDLUi::pollKnobs(){
 }
 
-void SDLPi::updateOLED(OledScreen &s){
+void SDLUi::updateOLED(OledScreen &s){
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     int x, y;
@@ -103,10 +98,10 @@ void SDLPi::updateOLED(OledScreen &s){
     SDL_RenderPresent(renderer);
 }
 
-void SDLPi::ping(){
+void SDLUi::ping(){
 }
 
-void SDLPi::shutdown() {
+void SDLUi::shutdown() {
     printf("sending shutdown...\n");
     SDL_JoystickClose(joystick);
     SDL_DestroyRenderer(renderer);
@@ -115,7 +110,7 @@ void SDLPi::shutdown() {
     exit(0);
 }
 
-void SDLPi::setLED(unsigned stat) {
+void SDLUi::setLED(unsigned stat) {
     stat %= 8;
 
     if (stat == 0) {

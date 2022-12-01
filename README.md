@@ -20,7 +20,7 @@ DEFAULT_FW="/root/fw_dir"
 
 ## make targets
 
-There are several hardware make-targets available. See the [Makefile](./Makefile) for customization options. They all result in differnt `fw_dir/mother` builds.
+There are several hardware make-targets available. See the [Makefile](./Makefile) for customization options. They all result in different `fw_dir/mother` builds.
 
 ### `make organelle`
 
@@ -38,7 +38,7 @@ This is a SDL-based UI. This allows keys (up/down/ENTER) & joystick (up/down/A) 
 
 ### `make pi_sdl_i2c_rotary`
 
-This is same as `sdl` above, but uses i2c drivers for primary rotary-encoder attached to [GPIO 2/3](https://pinout.xyz/pinout/i2c). Double-check `I2C_ROTARY` in [Makefile](./Makefile) matches the i2c address of your rotary-encoder.
+This is same as `sdl` above, but uses i2c drivers for primary rotary-encoder attached to [GPIO 2/3](https://pinout.xyz/pinout/i2c), and does not support joystick/keys. Double-check `I2C_ROTARY` in [Makefile](./Makefile) matches the i2c address of your rotary-encoder.
 
 ### `make pi_i2c_rotary_oled`
 
