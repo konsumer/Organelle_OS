@@ -23,10 +23,6 @@ SDL_LIBS := $(shell pkg-config --libs sdl2)
 default :
 	@echo "platform not specified"
 
-sdlpi : CXXFLAGS += $(SDL_CFLAGS) -DSDLPI_HW -DORGANELLE_HW_WIDTH=800 -DORGANELLE_HW_HEIGHT=600
-sdlpi : $(objects) hw_interfaces/SDLPi.o
-	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/SDLPi.o
-
 organelle : CXXFLAGS += -DSERIAL_HW
 organelle : $(objects) hw_interfaces/SerialMCU.o
 	$(CXX) -o fw_dir/mother $(objects) hw_interfaces/SerialMCU.o
@@ -35,10 +31,22 @@ organelle_m : CXXFLAGS += -DCM3GPIO_HW -DMICSEL_SWITCH -DPWR_SWITCH -DOLED_30FPS
 organelle_m : $(objects) hw_interfaces/CM3GPIO.o
 	$(CXX) -l wiringPi -o fw_dir/mother $(objects) hw_interfaces/CM3GPIO.o
 
+sdl : CXXFLAGS += $(SDL_CFLAGS) -DORGANELLE_SDL_UI_HW -DORGANELLE_HW_WIDTH=800 -DORGANELLE_HW_HEIGHT=600
+sdl : $(objects) hw_interfaces/SDLPi.o
+	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/SDLPi.o
+
+pi_sdl_i2c_rotary : CXXFLAGS += $(SDL_CFLAGS) -DORGANELLE_SDL_UI_HW -DORGANELLE_I2C_ROTARY_HW -DORGANELLE_HW_WIDTH=800 -DORGANELLE_HW_HEIGHT=600
+pi_sdl_i2c_rotary : $(objects) hw_interfaces/SDLPi.o hw_interfaces/I2C_Rotary_Pi.o
+	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/SDLPi.o hw_interfaces/I2C_Rotary_Pi.o
+
+pi_i2c_rotary_oled : CXXFLAGS += $(SDL_CFLAGS) -DORGANELLE_I2C_OLED_HW -DORGANELLE_I2C_ROTARY_HW
+pi_i2c_rotary_oled :  $(objects) hw_interfaces/I2C_Rotary_Pi.o hw_interfaces/I2C_OLED_Pi.o
+	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/I2C_OLED_Pi.o hw_interfaces/I2C_Rotary_Pi.o
+
 .PHONY : clean
 
 clean :
-	rm -f main $(objects) fw_dir/mother hw_interfaces/SDLPi.o hw_interfaces/SerialMCU.o hw_interfaces/CM3GPIO.o
+	rm -f main $(objects) fw_dir/mother hw_interfaces/SDLPi.o hw_interfaces/SerialMCU.o hw_interfaces/CM3GPIO.o hw_interfaces/I2C_Rotary_Pi.o hw_interfaces/I2C_OLED_Pi.o
 
 IMAGE_BUILD_VERSION = $(shell cat fw_dir/version)
 IMAGE_BUILD_TAG = $(shell cat fw_dir/buildtag)
@@ -103,3 +111,5 @@ SerialMCU.o: hardwares/SerialMCU.cpp hardwares/SerialMCU.h \
  hardwares/../OledScreen.h
 SDLPi.o: hardwares/SDLPi.cpp hardwares/SDLPi.h \
  hardwares/../OledScreen.h
+I2C_Rotary_Pi.o: hardwares/I2C_Rotary_Pi.cpp hardwares/I2C_Rotary_Pi.h
+I2C_OLED_Pi.o: hardwares/I2C_OLED_Pi.cpp hardwares/I2C_OLED_Pi.h hardwares/../OledScreen.h

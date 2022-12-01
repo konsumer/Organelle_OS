@@ -20,7 +20,7 @@
     #include "hw_interfaces/CM3GPIO.h"
 #endif
 
-#ifdef SDLPI_HW
+#ifdef ORGANELLE_SDL_UI_HW
     #include "hw_interfaces/SDLPi.h"
 #endif
 
@@ -54,7 +54,7 @@ SimpleWriter oscBuf;
     CM3GPIO controls;
 #endif
 
-#ifdef SDLPI_HW
+#ifdef ORGANELLE_SDL_UI_HW
     SDLPi controls;
 #endif
 
