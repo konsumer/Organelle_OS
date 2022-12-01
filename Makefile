@@ -23,6 +23,33 @@ SDL_LIBS := $(shell pkg-config --libs sdl2)
 default :
 	@echo "platform not specified"
 
+# TODO: organize hardware control classes into pieces, so they can be combined:
+
+#  SDLOled             ORGANELLE_HW_WIDTH, ORGANELLE_HW_HEIGHT
+#  SDLLED              (SDLOled)
+#  SDLInputKeys        (SDLOled)
+#  SDLInputJoystick    (SDLOled)
+#  PiI2cOled           I2C_OLED
+#  PiI2cLED            I2C_LED
+#  PiGpioLED           GPIO_LED
+#  PiI2cInputRotary    I2C_ROTARY
+#  PiEventInputRotary  EVENT_ROTARY_DEVICE
+#  SerialInput
+#  SerialOled
+#  SerialLED
+#  CM3GPIOInput
+#  CM3GPIOOled
+#  CM3GPIOLED
+
+# example combinations:
+
+# SDLOled, SDLLED, SDLInputKeys                   - All is emulated on screen, use keys, need to set ORGANELLE_HW_WIDTH, ORGANELLE_HW_HEIGHT
+# SDLOled, SDLLED, SDLInputJoystick               - All is emulated on screen, use joystick, need to set ORGANELLE_HW_WIDTH, ORGANELLE_HW_HEIGHT
+# SDLOled, SDLLED, SDLInputKeys, SDLInputJoystick - All is emulated on screen, use keys & joystick, need to set ORGANELLE_HW_WIDTH, ORGANELLE_HW_HEIGHT
+# SDLOled, PiI2cLED, PiI2cInputRotary             - Rotary & LED on i2c, use SDL screen, need to set ORGANELLE_HW_WIDTH, ORGANELLE_HW_HEIGHT, I2C_LED, I2C_ROTARY
+# PiI2cOled, PiI2cLED, PiI2cInputRotary           - All on Pi i2c devices, need to set I2C_OLED, I2C_LED, I2C_ROTARY
+# PiI2cOled, PiGpioLED, PiI2cInputRotary          - All on Pi i2c devices except LED, need to set GPIO_LED, I2C_OLED, I2C_ROTARY
+
 organelle : CXXFLAGS += -DSERIAL_HW
 organelle : $(objects) hw_interfaces/SerialMCU.o
 	$(CXX) -o fw_dir/mother $(objects) hw_interfaces/SerialMCU.o
