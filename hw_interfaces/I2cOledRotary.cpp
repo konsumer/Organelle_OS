@@ -39,6 +39,7 @@ void I2cOledRotary::shutdown() {
 }
 
 void I2cOledRotary::setLED(unsigned stat) {
+    // TODO: add i2c RGB indicator
     stat %= 8;
 
     if (stat == 0) {

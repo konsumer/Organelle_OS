@@ -111,6 +111,7 @@ void SDLUi::shutdown() {
 }
 
 void SDLUi::setLED(unsigned stat) {
+    // TODO: add indicator on screen
     stat %= 8;
 
     if (stat == 0) {

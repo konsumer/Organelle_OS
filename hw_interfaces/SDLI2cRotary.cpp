@@ -66,6 +66,7 @@ void SDLI2cRotary::shutdown() {
 }
 
 void SDLI2cRotary::setLED(unsigned stat) {
+    // TODO: add indicator on screen
     stat %= 8;
 
     if (stat == 0) {
