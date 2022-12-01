@@ -35,8 +35,8 @@ sdl : CXXFLAGS += $(SDL_CFLAGS) -DORGANELLE_SDL_UI_HW -DORGANELLE_HW_WIDTH=800 -
 sdl : $(objects) hw_interfaces/SDLUi.o
 	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/SDLUi.o
 
-pi_sdl_i2c_rotary : CXXFLAGS += $(SDL_CFLAGS) -DORGANELLE_SDL_UI_HW -DORGANELLE_I2C_ROTARY_HW -DORGANELLE_HW_WIDTH=800 -DORGANELLE_HW_HEIGHT=600 -DI2C_ROTARY=0x24u
-pi_sdl_i2c_rotary : $(objects) hw_interfaces/SDLI2cRotary.o
+sdl_pi_i2c_rotary : CXXFLAGS += $(SDL_CFLAGS) -DORGANELLE_SDL_UI_HW -DORGANELLE_I2C_ROTARY_HW -DORGANELLE_HW_WIDTH=800 -DORGANELLE_HW_HEIGHT=600 -DI2C_ROTARY=0x24u
+sdl_pi_i2c_rotary : $(objects) hw_interfaces/SDLI2cRotary.o
 	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/SDLI2cRotary.o
 
 pi_i2c_rotary_oled : CXXFLAGS += -DORGANELLE_I2C_OLED_HW -DORGANELLE_I2C_ROTARY_HW -DI2C_ROTARY=0x24u -DI2C_OLED=0x56u
