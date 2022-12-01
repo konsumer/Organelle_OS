@@ -50,6 +50,8 @@ default :
 # PiI2cOled, PiI2cLED, PiI2cInputRotary           - All on Pi i2c devices, need to set I2C_OLED, I2C_LED, I2C_ROTARY
 # PiI2cOled, PiGpioLED, PiI2cInputRotary          - All on Pi i2c devices except LED, need to set GPIO_LED, I2C_OLED, I2C_ROTARY
 
+# TODO: set defaults for all defines that make sense
+
 organelle : CXXFLAGS += -DSERIAL_HW
 organelle : $(objects) hw_interfaces/SerialMCU.o
 	$(CXX) -o fw_dir/mother $(objects) hw_interfaces/SerialMCU.o
