@@ -31,7 +31,7 @@ default :
 #  SDLInputJoystick    (SDLOled)
 #  PiI2cOled           I2C_OLED
 #  PiI2cLED            I2C_LED
-#  PiGpioLED           GPIO_LED
+#  PiGPIOLED           GPIO_LED
 #  PiI2cInputRotary    I2C_ROTARY
 #  PiEventInputRotary  EVENT_ROTARY_DEVICE
 #  SerialInput
@@ -48,7 +48,7 @@ default :
 # SDLOled, SDLLED, SDLInputKeys, SDLInputJoystick - All is emulated on screen, use keys & joystick, need to set ORGANELLE_HW_WIDTH, ORGANELLE_HW_HEIGHT
 # SDLOled, PiI2cLED, PiI2cInputRotary             - Rotary & LED on i2c, use SDL screen, need to set ORGANELLE_HW_WIDTH, ORGANELLE_HW_HEIGHT, I2C_LED, I2C_ROTARY
 # PiI2cOled, PiI2cLED, PiI2cInputRotary           - All on Pi i2c devices, need to set I2C_OLED, I2C_LED, I2C_ROTARY
-# PiI2cOled, PiGpioLED, PiI2cInputRotary          - All on Pi i2c devices except LED, need to set GPIO_LED, I2C_OLED, I2C_ROTARY
+# PiI2cOled, PiGPIOLED, PiI2cInputRotary          - All on Pi i2c devices except LED, need to set GPIO_LED, I2C_OLED, I2C_ROTARY
 
 # TODO: set defaults for all defines that make sense
 
