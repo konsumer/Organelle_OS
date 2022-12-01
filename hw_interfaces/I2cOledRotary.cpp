@@ -1,4 +1,4 @@
-#include "I2C_OLED_Pi.h"
+#include "I2cOledRotary.h"
 
 I2cOledRotary::I2cOledRotary() {
 }

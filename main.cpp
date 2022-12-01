@@ -29,7 +29,7 @@
 // Use SDL for input/output, and if set, use i2c-rotary
 #ifdef ORGANELLE_SDL_UI_HW
 #ifdef ORGANELLE_I2C_ROTARY_HW
-    #include "hw_interfaces/I2C_Rotary_Pi.h"
+    #include "hw_interfaces/SDLI2cRotary.h"
     SDLI2cRotary controls;
 #else
     #include "hw_interfaces/SDLUi.h"
@@ -40,7 +40,7 @@
 // Use i2c OLED for output, and if set, use i2c-rotary
 #ifdef ORGANELLE_I2C_OLED_HW
 #ifdef ORGANELLE_I2C_ROTARY_HW
-    #include "hw_interfaces/I2C_OLED_Pi.h"
+    #include "hw_interfaces/I2cOledRotary.h"
     I2cOledRotary controls;
 #endif
 #endif

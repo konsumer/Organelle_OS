@@ -1,4 +1,4 @@
-#include "I2C_Rotary_Pi.h"
+#include "SDLI2cRotary.h"
 
 SDLI2cRotary::SDLI2cRotary() {
 }

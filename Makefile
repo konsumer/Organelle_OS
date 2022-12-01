@@ -36,12 +36,12 @@ sdl : $(objects) hw_interfaces/SDLUi.o
 	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/SDLUi.o
 
 pi_sdl_i2c_rotary : CXXFLAGS += $(SDL_CFLAGS) -DORGANELLE_SDL_UI_HW -DORGANELLE_I2C_ROTARY_HW -DORGANELLE_HW_WIDTH=800 -DORGANELLE_HW_HEIGHT=600 -DI2C_ROTARY=0x24u
-pi_sdl_i2c_rotary : $(objects) hw_interfaces/I2C_Rotary_Pi.o
-	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/I2C_Rotary_Pi.o
+pi_sdl_i2c_rotary : $(objects) hw_interfaces/SDLI2cRotary.o
+	$(CXX) $(SDL_LIBS) -o fw_dir/mother $(objects) hw_interfaces/SDLI2cRotary.o
 
 pi_i2c_rotary_oled : CXXFLAGS += -DORGANELLE_I2C_OLED_HW -DORGANELLE_I2C_ROTARY_HW -DI2C_ROTARY=0x24u -DI2C_OLED=0x56u
-pi_i2c_rotary_oled :  $(objects) hw_interfaces/I2C_OLED_Pi.o
-	$(CXX) -o fw_dir/mother $(objects) hw_interfaces/I2C_OLED_Pi.o
+pi_i2c_rotary_oled :  $(objects) hw_interfaces/I2cOledRotary.o
+	$(CXX) -o fw_dir/mother $(objects) hw_interfaces/I2cOledRotary.o
 
 .PHONY : clean
 
@@ -111,5 +111,5 @@ SerialMCU.o: hardwares/SerialMCU.cpp hardwares/SerialMCU.h \
  hardwares/../OledScreen.h
 SDLUi.o: hardwares/SDLUi.cpp hardwares/SDLUi.h \
  hardwares/../OledScreen.h
-I2C_Rotary_Pi.o: hardwares/I2C_Rotary_Pi.cpp hardwares/I2C_Rotary_Pi.h
-I2C_OLED_Pi.o: hardwares/I2C_OLED_Pi.cpp hardwares/I2C_OLED_Pi.h hardwares/../OledScreen.h
+SDLI2cRotary.o: hardwares/SDLI2cRotary.cpp hardwares/SDLI2cRotary.h
+I2C_OLED_Pi.o: hardwares/I2cOledRotary.cpp hardwares/I2cOledRotary.h hardwares/../OledScreen.h
